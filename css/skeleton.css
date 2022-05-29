@@ -366,6 +366,8 @@ form {
   max-width: 100%;
   box-sizing: border-box; }
 .u-pull-right {
+  display: flex;
+  flex-direction: row;
   float: right; }
 .u-pull-left {
   float: left; }

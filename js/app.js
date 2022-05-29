@@ -3,7 +3,24 @@ const subMenuCart = document.querySelector("#carrito");
 const addBtn = document.querySelector("#lista-cursos");
 const cartContainer = document.querySelector("#lista-carrito tbody");
 const emptyCartBtn = document.querySelector("#vaciar-carrito");
+const headerContainer = document.querySelector(".u-pull-right");
+
+console.log(headerContainer);
+
+const HTMLCounter = document.createElement("p");
+HTMLCounter.innerHTML = `<span class="cartCounter">${3}</span>`;
+
+
+headerContainer.appendChild(HTMLCounter);
+console.log(headerContainer.children);
 let coursesList = [];
+
+//counter on header
+
+
+
+
+
 
 //events
 addBtn.addEventListener("click", addArticle);

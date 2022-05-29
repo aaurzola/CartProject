@@ -45,6 +45,7 @@ ul {
     margin: 30px 0;
 }
 .submenu {
+
     position: relative;
 }
 
@@ -179,4 +180,17 @@ ul {
 display: block;
 margin-bottom: 10px;
 text-decoration: none;
+}
+
+/* alejandro's custom CSS */
+.cartCounter {
+    color: white;
+    font-weight: bold;
+    background-color: #761E51;
+    border-radius: 300px;
+    padding: 10px 13px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    margin: 0;
+    margin-left: 10px;
+    margin-top: 15px;
 }
