@@ -4,23 +4,7 @@ const addBtn = document.querySelector("#lista-cursos");
 const cartContainer = document.querySelector("#lista-carrito tbody");
 const emptyCartBtn = document.querySelector("#vaciar-carrito");
 const headerContainer = document.querySelector(".u-pull-right");
-
-console.log(headerContainer);
-
-const HTMLCounter = document.createElement("p");
-HTMLCounter.innerHTML = `<span class="cartCounter">${3}</span>`;
-
-
-headerContainer.appendChild(HTMLCounter);
-console.log(headerContainer.children);
 let coursesList = [];
-
-//counter on header
-
-
-
-
-
 
 //events
 addBtn.addEventListener("click", addArticle);
@@ -42,6 +26,7 @@ function addArticle(e) {
       coursesList.push(courseToObject(selectedCourse));
     }
     listToHTML(coursesList);
+    writeCartCounter(coursesList);
   }
 }
 
@@ -82,10 +67,17 @@ function resetCartContainer() {
   }
 }
 
+function resetCartCounters() {
+  while (headerContainer.children.length > 1) {
+    headerContainer.removeChild(headerContainer.lastChild);
+  }
+}
+
 function emptyCartContainer(e) {
   if (e.target.classList.contains("button")) {
-    coursesList = []
+    coursesList = [];
     listToHTML(coursesList);
+    writeCartCounter(coursesList);
   }
 }
 
@@ -94,5 +86,15 @@ function deleteCourse(e) {
     const selectedCourseId = e.target.getAttribute("data-id");
     coursesList = coursesList.filter(course => (course.id !== selectedCourseId));
     listToHTML(coursesList);
+    writeCartCounter(coursesList);
   }
 }
+
+//generates Cart Counter into the HTML
+function writeCartCounter(list) {
+  resetCartCounters();
+  let quantityCounter = list.reduce((total, course) => total + course.quantity, 0);
+  const HTMLCounter = document.createElement("p");
+  HTMLCounter.innerHTML = `<span class="cartCounter">${quantityCounter}</span>`;
+  headerContainer.appendChild(HTMLCounter);
+} 
