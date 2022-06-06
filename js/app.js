@@ -11,6 +11,12 @@ addBtn.addEventListener("click", addArticle);
 subMenuCart.addEventListener("click", emptyCartContainer);
 subMenuCart.addEventListener("click", deleteCourse);
 
+document.addEventListener("DOMContentLoaded", () => {
+  coursesList = JSON.parse(localStorage.getItem("ShoppingCart")) || [];
+  listToHTML(coursesList);
+  writeCartCounter(coursesList);
+});
+
 //functions
 function addArticle(e) {
   e.preventDefault();
@@ -27,7 +33,12 @@ function addArticle(e) {
     }
     listToHTML(coursesList);
     writeCartCounter(coursesList);
+    syncLocalStorage(coursesList);
   }
+}
+
+function syncLocalStorage(list) {
+  localStorage.setItem("ShoppingCart", JSON.stringify(list));
 }
 
 //gets the corresponding course and wraps it into an object
@@ -76,6 +87,7 @@ function resetCartCounters() {
 function emptyCartContainer(e) {
   if (e.target.classList.contains("button")) {
     coursesList = [];
+    syncLocalStorage(coursesList);
     listToHTML(coursesList);
     writeCartCounter(coursesList);
   }
@@ -85,6 +97,7 @@ function deleteCourse(e) {
   if (e.target.classList.contains("borrar-curso")) {
     const selectedCourseId = e.target.getAttribute("data-id");
     coursesList = coursesList.filter(course => (course.id !== selectedCourseId));
+    syncLocalStorage(coursesList);
     listToHTML(coursesList);
     writeCartCounter(coursesList);
   }
